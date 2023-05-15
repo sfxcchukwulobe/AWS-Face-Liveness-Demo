@@ -23,6 +23,7 @@ public class FaceLivenessDetectorApplication {
             System.out.println("Status of Face Liveness Session: " + status);
 
         } catch(AmazonRekognitionException e) {
+            System.out.println("Amazon Rekognition error occurred");
             e.printStackTrace();
         } catch (Exception e) {
             System.out.println("An error outside Amazon Rekognition occurred");
