@@ -1,3 +1,6 @@
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.rekognition.AmazonRekognition;
 import com.amazonaws.services.rekognition.AmazonRekognitionClientBuilder;
 import com.amazonaws.services.rekognition.model.AmazonRekognitionException;
@@ -13,7 +16,16 @@ public class FaceLivenessDetectorApplication {
     public static void main(String[] args) {
         System.out.println("Welcome to Face Liveness Detector");
 
-        rekognitionClient = AmazonRekognitionClientBuilder.defaultClient();
+        String accessKey = "";
+        String secretKey = "";
+        String regionName = "";
+
+        BasicAWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
+
+        rekognitionClient = AmazonRekognitionClientBuilder.standard()
+                .withCredentials(new AWSStaticCredentialsProvider(credentials))
+                .withRegion(Regions.fromName(regionName))
+                .build();
 
         try {
             String sessionId = createSession();
